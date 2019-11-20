@@ -77,6 +77,11 @@
     }
   });
 
+  var deleteUserPhotos = function () {
+    avatarPreviewElement.src = 'img/muffin-grey.svg';
+    window.utils.removeElements(photoPreviewElement);
+  };
+
   //  Функция заполнения поля адреса
   var getAddress = function (pinX, pinY) {
     var addressValue = pinX + ', ' + pinY;
@@ -138,9 +143,10 @@
     window.backend.showSuccessMessage();
     disableAdForm(adFormElement, true);
     disableAdForm(mapFiltersContainerElement, true);
-    adFormElement.reset(adFormElement, true);
+    adFormElement.reset();
     window.filters.filtersFormElement.reset();
     resetMainPin();
+    deleteUserPhotos();
   };
 
   adFormElement.addEventListener('submit', function (evt) {
@@ -240,18 +246,21 @@
   resetButtonElement.addEventListener('mousedown', function () {
     disableAdForm(adFormElement, true);
     disableAdForm(mapFiltersContainerElement, true);
-    adFormElement.reset(adFormElement, true);
+    adFormElement.reset();
     window.filters.filtersFormElement.reset();
     resetMainPin();
+    deleteUserPhotos();
   });
 
   //  по нажатию на Enter
   resetButtonElement.addEventListener('keydown', function (evt) {
     if (evt.keyCode === ENTER_KEYCODE) {
       disableAdForm(adFormElement, true);
+      disableAdForm(mapFiltersContainerElement, true);
       adFormElement.reset();
       window.filters.filtersFormElement.reset();
       resetMainPin();
+      deleteUserPhotos();
     }
   });
 
